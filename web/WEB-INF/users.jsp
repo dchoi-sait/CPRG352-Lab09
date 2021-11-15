@@ -38,7 +38,7 @@
                         <div>
                             <select name="role">
                                 <c:forEach items="${roles}" var="role">
-                                    <option value="${role.roleID}">${role.roleName}</option>
+                                    <option value="${role.roleId}">${role.roleName}</option>
                                 </c:forEach>
                             </select>
                             <label for="isActive">Active</label>
@@ -68,8 +68,8 @@
                                 <c:forEach items="${users}" var="user">
                                     <tr>
                                         <td>${user.email}</td>
-                                        <td>${user.fName}</td>
-                                        <td>${user.lName}</td>
+                                        <td>${user.firstName}</td>
+                                        <td>${user.lastName}</td>
                                         <td><a href="<c:url value="user?key=${user.email}"/>">Edit</a></td>
                                         <td><a href="<c:url value="user?delete=${user.email}"/>">Delete</a></td>
                                     </tr>
@@ -88,10 +88,10 @@
                             <input type="text" name="email-e" placeholder="Email" readonly value="${user.email}">
                         </div>
                         <div>
-                            <input type="text" name="fname-e" required="true" placeholder="First Name" value="${user.fName}">
+                            <input type="text" name="fname-e" required="true" placeholder="First Name" value="${user.firstName}">
                         </div>
                         <div>
-                            <input type="text" name="lname-e" required="true" placeholder="Last Name" value="${user.lName}">
+                            <input type="text" name="lname-e" required="true" placeholder="Last Name" value="${user.lastName}">
                         </div>
                         <div>
                             <input type="password" name="password-e" required="true" placeholder="Password" value="${user.password}">
@@ -100,13 +100,13 @@
                             <select name="role-e">
 
                                 <c:forEach items="${roles}" var="role">
-                                    <option value="${role.roleID}" ${user.role == role.roleID? "selected" : null}>${role.roleName}</option>
+                                    <option value="${role.roleId}" ${user.role == role.roleId? "selected" : null}>${role.roleName}</option>
                                 </c:forEach>
 
 
                             </select>
                             <label for="isActive-e">Active</label>
-                            <input type="checkbox" id="isActive-e" name="isActive-e" value="true" ${user.isActive != null ? "checked":null}>
+                            <input type="checkbox" id="isActive-e" name="isActive-e" value="true" ${user.active != null ? "checked":null}>
                         </div>
                         <input name="action" value="edit" type="hidden">
                         <input class="button" type="submit" value="Confirm">

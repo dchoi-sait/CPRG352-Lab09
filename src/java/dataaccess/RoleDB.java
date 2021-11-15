@@ -11,33 +11,19 @@ import models.Role;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.persistence.EntityManager;
 
 public class RoleDB {
     
-    public List<Role> getAll() throws Exception{
-    List<Role> roles = new ArrayList<>();
-    ConnectionPool cp = ConnectionPool.getInstance();
-    Connection con = cp.getConnection();
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-    
-    String sql = "Select * from role";
-    try{
-        ps = con.prepareStatement(sql);
-        rs = ps.executeQuery();
-        while(rs.next()){
-            int roleID = rs.getInt(1);
-            String roleName = rs.getString(2);
-            Role role = new Role(roleID, roleName);
-            roles.add(role);
+    public List<Role> getAll() throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            List<Role> roles = em.createNamedQuery("Role.findAll",Role.class).getResultList();
+            return roles;
+        } finally {
+            em.close();
         }
     }
-    finally{
-        DBUtil.closeResultSet(rs);
-        DBUtil.closePreparedStatement(ps);
-        cp.freeConnection(con);
-    }
-        return roles;
-            }
     
 }

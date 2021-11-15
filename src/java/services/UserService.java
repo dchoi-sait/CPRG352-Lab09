@@ -28,7 +28,14 @@ public class UserService {
     }
 
     public void update(User user) throws Exception {
-        new UserDB().update(user);
+        User updateUser = new UserDB().get(user.getEmail());
+        updateUser.setActive(user.getActive());
+        updateUser.setFirstName(user.getFirstName());
+        updateUser.setLastName(user.getLastName());
+        updateUser.setPassword(user.getPassword());
+        updateUser.setRole(user.getRole());
+              
+                new UserDB().update(updateUser);
     }
 
     public void delete(User user) throws Exception {

@@ -86,7 +86,7 @@ public class UserServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 int role = Integer.parseInt(request.getParameter("role"));
                 boolean isActive = request.getParameter("isActive") != null;
-                User user = new User(email, isActive, fname, lname, password, role);
+                User user = new User(email, isActive, fname, lname, password);
                 us.insert(user);
             }
             
@@ -98,7 +98,7 @@ public class UserServlet extends HttpServlet {
                 String password = request.getParameter("password-e");
                 int role = Integer.parseInt(request.getParameter("role-e"));
                 boolean isActive = request.getParameter("isActive-e") != null;
-                User user = new User(email, isActive, fname, lname, password, role);
+                User user = new User(email, isActive, fname, lname, password);
                 Logger.getAnonymousLogger().log(Level.SEVERE, password);
                 us.update(user);
                 
